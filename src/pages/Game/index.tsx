@@ -1,6 +1,7 @@
 import WhiteCard from '../../components/WhiteCard';
 import BlackCard from '../../components/BlackCard';
 import WhiteCardBack from '../../components/WhiteCardBack';
+import BlackCardBack from '../../components/BlackCardBack';
 import * as S from './styles';
 
 const Game: React.FC = () => {
@@ -21,11 +22,13 @@ const Game: React.FC = () => {
             <WhiteCard />
             <WhiteCard />
             <WhiteCard />
+            <WhiteCard />
             <BlackCard />
           </S.UserCards>
         </S.Main>
       </S.Container>
       <WhiteCardBack />
+      <BlackCardBack />
     </>
   );
 };
