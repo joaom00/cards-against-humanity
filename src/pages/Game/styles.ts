@@ -26,6 +26,8 @@ export const Cards = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
+  padding-left: 32px;
+  overflow: auto;
 
   div + div {
     margin-left: 8px;

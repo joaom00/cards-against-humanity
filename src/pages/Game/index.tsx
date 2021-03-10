@@ -3,16 +3,18 @@ import BlackCard from '../../components/BlackCard';
 import WhiteCardBack from '../../components/WhiteCardBack';
 import BlackCardBack from '../../components/BlackCardBack';
 import * as S from './styles';
+import Players from '../../components/Players';
 
 const Game: React.FC = () => {
   return (
     <>
       <S.Container>
-        <div className="players"></div>
+        <Players />
 
         <S.Main>
           <S.Cards>
             <BlackCard />
+            <WhiteCard />
             <WhiteCard />
             <WhiteCard />
             <WhiteCard />
