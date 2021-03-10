@@ -9,7 +9,11 @@ import BlackCardBack from '../../components/BlackCardBack';
 import * as S from './styles';
 import { socket } from '../../services/socket';
 
-const Game: React.FC = () => {
+interface GameProps {
+  room: string;
+}
+
+const Game: React.FC<GameProps> = ({ room }) => {
   const [whiteCards, setWhiteCards] = useState<string[]>([]);
   const [blackCard, setBlackCard] = useState('');
   const [whiteCardsSelected, setWhiteCardsSelected] = useState<string[]>([]);
