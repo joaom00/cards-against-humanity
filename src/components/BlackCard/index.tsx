@@ -1,10 +1,14 @@
 import logoWhite from '../../assets/logo-white.png';
 import * as S from './styles';
 
-const BlackCard: React.FC = () => {
+interface BlackCardProps {
+  title: string;
+}
+
+const BlackCard: React.FC<BlackCardProps> = ({ title }) => {
   return (
     <S.Container>
-      <p>Resolução da ANAC agora proíbe _______ em aeronaves.</p>
+      <p>{title}</p>
       <img src={logoWhite} alt="Cards Against Humanity" />
     </S.Container>
   );

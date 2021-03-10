@@ -1,11 +1,31 @@
+import { useEffect, useState } from 'react';
+
+import Players from '../../components/Players';
 import WhiteCard from '../../components/WhiteCard';
 import BlackCard from '../../components/BlackCard';
 import WhiteCardBack from '../../components/WhiteCardBack';
 import BlackCardBack from '../../components/BlackCardBack';
+
 import * as S from './styles';
-import Players from '../../components/Players';
+import { socket } from '../../services/socket';
 
 const Game: React.FC = () => {
+  const [whiteCards, setWhiteCards] = useState<string[]>([]);
+  const [blackCard, setBlackCard] = useState('');
+  const [whiteCardsSelected, setWhiteCardsSelected] = useState<string[]>([]);
+
+  const whiteCardSelected = (index: number) => {
+    const card = whiteCards.splice(index, 1);
+    setWhiteCardsSelected([...whiteCardsSelected, card[0]]);
+  };
+
+  useEffect(() => {
+    socket.on('whiteCards', (cards) => {
+      setWhiteCards(cards);
+    });
+    socket.on('blackCard', (card) => setBlackCard(card));
+  }, []);
+
   return (
     <>
       <S.Container>
@@ -13,19 +33,18 @@ const Game: React.FC = () => {
 
         <S.Main>
           <S.Cards>
-            <BlackCard />
-            <WhiteCard />
-            <WhiteCard />
-            <WhiteCard />
-            <WhiteCard />
+            <BlackCard title={blackCard} />
+            {whiteCardsSelected.map((card, index) => (
+              <WhiteCard title={card} key={index} />
+            ))}
           </S.Cards>
 
           <S.UserCards>
-            <WhiteCard />
-            <WhiteCard />
-            <WhiteCard />
-            <WhiteCard />
-            <BlackCard />
+            {whiteCards.map((card, index) => (
+              <div onClick={() => whiteCardSelected(index)}>
+                <WhiteCard title={card} key={index} />
+              </div>
+            ))}
           </S.UserCards>
         </S.Main>
       </S.Container>

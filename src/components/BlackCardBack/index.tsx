@@ -1,15 +1,20 @@
+import { socket } from '../../services/socket';
 import * as S from './styles';
 
 const BlackCardBack: React.FC = () => {
+  const newBlackCard = () => {
+    socket.emit('newBlackCard');
+  };
+
   return (
     <S.Container>
-      <S.WhiteCard>
+      <S.BlackCard onClick={newBlackCard}>
         <p>
           Cards <br />
           Against <br />
           Humanity.
         </p>
-      </S.WhiteCard>
+      </S.BlackCard>
     </S.Container>
   );
 };

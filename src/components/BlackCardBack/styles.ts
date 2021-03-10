@@ -7,7 +7,7 @@ export const Container = styled.div`
   cursor: pointer;
 `;
 
-export const WhiteCard = styled.div`
+export const BlackCard = styled.div`
   background-color: #000;
   color: #fff;
   width: 129px;

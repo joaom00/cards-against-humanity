@@ -11,6 +11,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  overflow-y: auto;
 
   p {
     flex: 1;
