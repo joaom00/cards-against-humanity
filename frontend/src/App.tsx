@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { socket } from './services/socket';
 
-import Game from './pages/Game';
 import Routes from './routes';
 
 import GlobalStyles from './styles/global';
