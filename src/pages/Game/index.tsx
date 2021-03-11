@@ -18,17 +18,27 @@ const Game: React.FC<GameProps> = ({ room }) => {
   const [blackCard, setBlackCard] = useState('');
   const [whiteCardsSelected, setWhiteCardsSelected] = useState<string[]>([]);
 
+  console.log(whiteCardsSelected);
+
   const whiteCardSelected = (index: number) => {
     const card = whiteCards.splice(index, 1);
-    setWhiteCardsSelected([...whiteCardsSelected, card[0]]);
+    socket.emit('newWhiteCardSelected', { room: 'room', card });
   };
+
+  useEffect(() => {
+    socket.on('whiteCardSelected', (card) => {
+      setWhiteCardsSelected([...whiteCardsSelected, card[0]]);
+    });
+  }, [whiteCardsSelected]);
 
   useEffect(() => {
     socket.on('whiteCards', (cards) => {
       setWhiteCards(cards);
     });
-    socket.on('blackCard', (card) => setBlackCard(card));
   }, []);
+
+  socket.on('whiteCard', (card) => setWhiteCards([...whiteCards, card]));
+  socket.on('blackCard', (card) => setBlackCard(card));
 
   return (
     <>
@@ -37,7 +47,7 @@ const Game: React.FC<GameProps> = ({ room }) => {
 
         <S.Main>
           <S.Cards>
-            <BlackCard title={blackCard} />
+            {blackCard && <BlackCard title={blackCard} />}
             {whiteCardsSelected.map((card, index) => (
               <WhiteCard title={card} key={index} />
             ))}
@@ -45,8 +55,11 @@ const Game: React.FC<GameProps> = ({ room }) => {
 
           <S.UserCards>
             {whiteCards.map((card, index) => (
-              <div onClick={() => whiteCardSelected(index)}>
-                <WhiteCard title={card} key={index} />
+              <div
+                key={Math.floor(Math.random() * 999999)}
+                onClick={() => whiteCardSelected(index)}
+              >
+                <WhiteCard title={card} />
               </div>
             ))}
           </S.UserCards>

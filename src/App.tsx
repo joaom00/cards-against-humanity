@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Game from './pages/Game';
 import { socket } from './services/socket';
 import GlobalStyles from './styles/global';
 
 const App: React.FC = () => {
-  const [room, setRoom] = useState('room');
+  const room = 'room';
 
   useEffect(() => {
     socket.emit('joinRoom', room);
-  }, [room]);
+  }, []);
 
   return (
     <>

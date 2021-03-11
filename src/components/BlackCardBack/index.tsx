@@ -3,7 +3,7 @@ import * as S from './styles';
 
 const BlackCardBack: React.FC = () => {
   const newBlackCard = () => {
-    socket.emit('newBlackCard');
+    socket.emit('newBlackCard', 'room');
   };
 
   return (
