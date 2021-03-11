@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import * as S from './styles';
 
 const Home: React.FC = () => {
@@ -12,8 +13,12 @@ const Home: React.FC = () => {
 
         <S.BottomContainer>
           <S.Buttons>
-            <button className="new-game-btn">Novo Jogo</button>
-            <button className="code-btn">Inserir Código</button>
+            <Link to="/newgame">
+              <button className="new-game-btn">Novo Jogo</button>
+            </Link>
+            <Link to="/insertcode">
+              <button className="code-btn">Inserir Código</button>
+            </Link>
           </S.Buttons>
 
           <span>
