@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
-import Game from './pages/Game';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { socket } from './services/socket';
+
+import Game from './pages/Game';
+import Routes from './routes';
+
 import GlobalStyles from './styles/global';
 
 const App: React.FC = () => {
@@ -11,10 +15,10 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <Game room={room} />
+    <Router>
+      <Routes />
       <GlobalStyles />
-    </>
+    </Router>
   );
 };
 
