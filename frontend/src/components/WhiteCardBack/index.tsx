@@ -1,9 +1,13 @@
 import { socket } from '../../services/socket';
 import * as S from './styles';
 
-const WhiteCardBack: React.FC = () => {
+interface WhiteCardBackProps {
+  room: string | null;
+}
+
+const WhiteCardBack: React.FC<WhiteCardBackProps> = ({ room }) => {
   const newWhiteCard = () => {
-    socket.emit('newWhiteCard', 'room');
+    socket.emit('newWhiteCard', room);
   };
 
   return (
