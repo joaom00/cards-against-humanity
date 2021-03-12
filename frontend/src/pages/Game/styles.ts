@@ -19,6 +19,23 @@ export const Main = styled.div`
   width: calc(80vw - 20vw);
   display: flex;
   flex-direction: column;
+
+  .new-round-btn {
+    align-self: center;
+    margin-top: 32px;
+    background-color: #202020;
+    color: #f0f0f0;
+    padding: 16px;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+
+    font-family: Nunito;
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
 `;
 
 export const Cards = styled.div`
