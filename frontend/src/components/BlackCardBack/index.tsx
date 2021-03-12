@@ -1,9 +1,13 @@
 import { socket } from '../../services/socket';
 import * as S from './styles';
 
-const BlackCardBack: React.FC = () => {
+interface BlackCardBackProps {
+  room: string | null;
+}
+
+const BlackCardBack: React.FC<BlackCardBackProps> = ({ room }) => {
   const newBlackCard = () => {
-    socket.emit('newBlackCard', 'room');
+    socket.emit('newBlackCard', room);
   };
 
   return (
