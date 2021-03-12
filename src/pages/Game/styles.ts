@@ -44,7 +44,7 @@ export const Cards = styled.div`
   justify-content: start;
   align-items: center;
   padding-left: 32px;
-  overflow: auto;
+  overflow-x: auto;
 
   div + div {
     margin-left: 8px;
