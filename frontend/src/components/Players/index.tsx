@@ -9,6 +9,10 @@ interface PlayersProps {
 }
 
 const Players: React.FC<PlayersProps> = ({ users }) => {
+  Object.assign(users, {
+    ...users,
+  });
+
   return (
     <S.Container>
       <S.Header>

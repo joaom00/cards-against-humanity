@@ -5,6 +5,8 @@ export const Container = styled.div`
   width: 100%;
   margin: auto 0;
   padding-left: 32px;
+
+  font-family: Nunito;
 `;
 
 export const Header = styled.header`
@@ -16,11 +18,13 @@ export const Header = styled.header`
   p {
     font-size: 18px;
     color: #202020;
+    font-weight: 700;
   }
 
   span {
     font-size: 18px;
     color: #202020;
+    font-weight: 700;
   }
 `;
 
@@ -29,8 +33,11 @@ export const Players = styled.ul`
 
   li {
     list-style: none;
-    font-size: 14px;
-    color: #cfcfcf;
+    color: #202020;
+
+    font-family: Nunito;
+    font-size: 16px;
+    font-weight: 600;
   }
 
   li + li {
