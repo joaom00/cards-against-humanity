@@ -34,7 +34,9 @@ const InsertCode: React.FC = () => {
           onClick={(event) => (!name || !room ? event.preventDefault() : null)}
           to={`/app?name=${name}&room=${room}`}
         >
-          <button>Entrar na sala</button>
+          <button type="submit" className="join-room-btn">
+            Entrar na sala
+          </button>
         </Link>
       </S.Container>
     </S.Background>
