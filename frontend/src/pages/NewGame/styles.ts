@@ -16,7 +16,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  > button {
+  .join-room-btn {
     align-self: center;
     border: 0;
     outline: 0;

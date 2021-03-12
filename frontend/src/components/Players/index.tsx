@@ -1,25 +1,24 @@
-import { useEffect, useState } from 'react';
-import { socket } from '../../services/socket';
 import * as S from './styles';
 
-const Players: React.FC = () => {
-  const [countedPlayers, setCountedPlayers] = useState(0);
+interface PlayersProps {
+  users: Array<{
+    id: string;
+    name: string;
+    room: string;
+  }>;
+}
 
-  useEffect(() => {
-    socket.on('countedPlayers', (size) => setCountedPlayers(size));
-  }, []);
-
+const Players: React.FC<PlayersProps> = ({ users }) => {
   return (
     <S.Container>
       <S.Header>
         <p>Jogadores</p>
-        <span>{countedPlayers}</span>
+        <span>{users.length}</span>
       </S.Header>
       <S.Players>
-        <li>Negatlv3</li>
-        <li>Negatlv3</li>
-        <li>Negatlv3</li>
-        <li>Negatlv3</li>
+        {users.map((user, index) => (
+          <li key={index}>{user.name}</li>
+        ))}
       </S.Players>
     </S.Container>
   );
