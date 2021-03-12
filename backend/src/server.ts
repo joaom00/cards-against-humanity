@@ -1,6 +1,7 @@
 import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import cors from 'cors';
 
 import { addUser, getUsersInRoom, removeUser } from './users';
 import {
@@ -19,6 +20,8 @@ const io = new Server(server, {
     methods: ['GET', 'POST'],
   },
 });
+
+app.use(cors());
 
 io.on('connection', (socket) => {
   console.log('new user connected');
