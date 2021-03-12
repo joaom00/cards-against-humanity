@@ -1,9 +1,11 @@
 import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import { addUser, getUsersInRoom } from './users';
 
 import whiteCards from '../cards/white';
 import blackCards from '../cards/black';
+import { createDeckOfRoom, deckAlreadyExists, pickFourCards } from './cards';
 
 const app = express();
 const server = createServer(app);
@@ -15,30 +17,40 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-  let whiteCardsClone = [...whiteCards];
+  console.log('new user connected');
+
   let blackCardsClone = [...blackCards];
-  const cards = [];
 
-  socket.on('joinRoom', async (roomId) => {
-    socket.join(roomId);
-    console.log(`User join in ${roomId}`);
-    const countedPlayers = await io.to(roomId).allSockets();
-    io.to(roomId).emit('countedPlayers', countedPlayers.size);
+  socket.on('joinRoom', ({ name, room }) => {
+    addUser(socket.id, name, room);
+
+    socket.join(room);
+
+    if (deckAlreadyExists(room)) return;
+
+    const decks = createDeckOfRoom(room);
   });
 
-  for (let i = 0; i < 4; i++) {
-    const randomIndex = Math.floor(Math.random() * whiteCardsClone.length - 1);
-    const card = whiteCardsClone.splice(randomIndex, 1);
-    cards.push(card);
-  }
+  socket.on('getFourWhiteCards', (room) => {
+    if (!room) return;
+    const fourCards = pickFourCards(room);
 
-  socket.emit('whiteCards', cards);
+    console.log(fourCards?.roomDeck.deck.length);
 
-  socket.on('newWhiteCard', (room) => {
-    const randomIndex = Math.floor(Math.random() * whiteCardsClone.length - 1);
-    const card = whiteCardsClone.splice(randomIndex, 1);
-    socket.emit('whiteCard', card);
+    socket.emit('fourWhiteCards', fourCards?.fourCards);
   });
+
+  socket.on('getUsersInRoom', (room) => {
+    const users = getUsersInRoom(room);
+
+    io.to(room).emit('usersInRoom', users);
+  });
+
+  // socket.on('newWhiteCard', () => {
+  //   const randomIndex = Math.floor(Math.random() * whiteCardsClone.length - 1);
+  //   const card = whiteCardsClone.splice(randomIndex, 1);
+  //   socket.emit('whiteCard', card);
+  // });
 
   socket.on('newBlackCard', (room) => {
     const randomIndex = Math.floor(Math.random() * blackCardsClone.length - 1);
@@ -49,6 +61,10 @@ io.on('connection', (socket) => {
   socket.on('newWhiteCardSelected', (data) => {
     const card = data.card[0];
     io.to(data.room).emit('whiteCardSelected', card);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user had left!!!');
   });
 });
 
