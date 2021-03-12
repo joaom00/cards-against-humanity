@@ -1,7 +1,15 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { socket } from '../../services/socket';
 import * as S from './styles';
 
 const Home: React.FC = () => {
+  const [sockets, setSockets] = useState(0);
+
+  socket.on('socketsConnected', (sockets) => {
+    setSockets(sockets);
+  });
+
   return (
     <S.Background>
       <S.Container>
@@ -22,7 +30,7 @@ const Home: React.FC = () => {
           </S.Buttons>
 
           <span>
-            10 pessoas jogando neste
+            {sockets} pessoas jogando neste
             <br /> momento
           </span>
         </S.BottomContainer>
