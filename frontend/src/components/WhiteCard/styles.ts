@@ -5,23 +5,18 @@ export const Container = styled.div`
   flex-direction: column;
   cursor: pointer;
 
-  span {
-    font-size: 14px;
-    color: #464646;
-    margin-top: 16px;
-    align-self: center;
-  }
-`;
+  font-family: Nunito;
 
-export const WhiteCard = styled.div`
   background-color: #fff;
-  width: 129px;
-  height: 158px;
+  width: 142px;
+  height: 174px;
   border-radius: 10px;
   padding: 16px;
   box-shadow: 0px 20px 40px rgba(32, 32, 32, 0.08);
   display: flex;
   flex-direction: column;
+
+  overflow-y: auto;
 
   p {
     flex: 1;
