@@ -46,6 +46,10 @@ export const Cards = styled.div`
   padding-left: 32px;
   overflow-x: auto;
 
+  div {
+    flex-shrink: 0;
+  }
+
   div + div {
     margin-left: 8px;
   }
